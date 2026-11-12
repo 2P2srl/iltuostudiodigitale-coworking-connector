@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Sleep;
 use Illuminate\Validation\ValidationException;
 use IlTuoStudioDigitale\CoworkingConnector\Data\AcceptedEventData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\CurriculumFile;
 use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\EventTypeData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\FileData;
@@ -27,6 +28,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Data\MemberPage;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalPage;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfileOptionsData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\RecordedTransactionData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\RegisteredMemberData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\SystemData;
@@ -47,6 +49,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Outbox\TransactionOutbox;
 use IlTuoStudioDigitale\CoworkingConnector\Support\FileHash;
 use IlTuoStudioDigitale\CoworkingConnector\Validation\PayloadValidator;
 use InvalidArgumentException;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 use Throwable;
 
 /**
@@ -182,17 +185,52 @@ final readonly class PlatformClient
     }
 
     /**
-     * GET /professionals: the consultants registered on the platform who agreed to be found by the firms, without
-     * contacts (rules N1–N3).
+     * GET /profile-options: the options of the profile of the consultants, with the labels to show (rule C6).
      */
-    public function searchProfessionals(?string $typology = null, ?string $province = null, ?string $search = null, ?int $perPage = null, ?string $cursor = null): ProfessionalPage
+    public function profileOptions(): ProfileOptionsData
     {
+        return ProfileOptionsData::from($this->data($this->request('GET', 'profile-options')));
+    }
+
+    /**
+     * GET /professionals: the consultants registered on the platform who agreed to be found by the firms, with their
+     * profile and without contacts (rules N1–N3). The codes of the filters are those of profileOptions(): a centre, the
+     * competences a consultant must all have, and availability (collaboration or employment) and work mode (remote or
+     * on_site), which also find whoever chose both (rule N6).
+     *
+     * @param  list<string>  $competences
+     *
+     * @throws ValidationException More than Contract::MAX_COMPETENCE_FILTERS competences, before any request.
+     */
+    public function searchProfessionals(
+        ?string $typology = null,
+        ?string $province = null,
+        ?string $search = null,
+        ?int $perPage = null,
+        ?string $cursor = null,
+        ?string $centre = null,
+        array $competences = [],
+        ?string $availability = null,
+        ?string $workMode = null,
+        ?string $qualification = null,
+    ): ProfessionalPage {
+        validator(
+            ['competences' => $competences],
+            ['competences' => ['max:'.Contract::MAX_COMPETENCE_FILTERS]],
+            ['competences.max' => 'Al massimo :max competenze in una sola ricerca.'],
+        )->validate();
+
         $response = $this->request('GET', 'professionals', $this->query([
             'typology' => $typology,
             'province' => $province,
             'search' => $search,
             'per_page' => $perPage,
             'cursor' => $cursor,
+            'centre' => $centre,
+            'competences' => $competences,
+            'availability' => $availability,
+            'work_mode' => $workMode,
+            'qualification' => $qualification,
         ]));
 
         return new ProfessionalPage(
@@ -218,6 +256,26 @@ final readonly class PlatformClient
         {
             throw $exception->status === 404 ? new ProfessionalNotFoundException($professionalId) : $exception;
         }
+    }
+
+    /**
+     * GET /professionals/{id}/curriculum: the curriculum of a consultant in clear, to show the firm before it assigns
+     * (rule N7). The platform keeps the download (rule N5).
+     *
+     * @throws ProfessionalNotFoundException The consultant is not among those to find, or has no curriculum.
+     */
+    public function curriculum(string $professionalId): CurriculumFile
+    {
+        try
+        {
+            $response = $this->request('GET', 'professionals/'.rawurlencode($professionalId).'/curriculum');
+        }
+        catch (PlatformRequestException $exception)
+        {
+            throw $exception->status === 404 ? new ProfessionalNotFoundException($professionalId) : $exception;
+        }
+
+        return new CurriculumFile(self::attachmentName((string) $response->header('Content-Disposition')) ?? 'curriculum.pdf', $response->body());
     }
 
     /**
@@ -463,6 +521,22 @@ final readonly class PlatformClient
     }
 
     /**
+     * The name of the file in a Content-Disposition: the UTF-8 one (RFC 6266) when there is, otherwise the plain one.
+     */
+    private static function attachmentName(string $disposition): ?string
+    {
+        $parameters = HeaderUtils::combine(HeaderUtils::split($disposition, ';='));
+        $encoded = $parameters['filename*'] ?? null;
+
+        if (is_string($encoded) && str_starts_with(mb_strtolower($encoded), "utf-8''"))
+        {
+            return rawurldecode(mb_substr($encoded, 7));
+        }
+
+        return is_string($parameters['filename'] ?? null) ? $parameters['filename'] : null;
+    }
+
+    /**
      * The multipart request of an upload, with the fields before the content (rule F4), and its own retries: the
      * retries of the HTTP client would send again a stream already read. Guzzle closes each stream it releases.
      *
@@ -703,7 +777,7 @@ final readonly class PlatformClient
      */
     private function query(array $filters): array
     {
-        return array_filter($filters, static fn (mixed $value): bool => $value !== null);
+        return array_filter($filters, static fn (mixed $value): bool => $value !== null && $value !== []);
     }
 
     /**

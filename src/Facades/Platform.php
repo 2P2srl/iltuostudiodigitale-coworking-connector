@@ -6,6 +6,7 @@ namespace IlTuoStudioDigitale\CoworkingConnector\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use IlTuoStudioDigitale\CoworkingConnector\Data\AcceptedEventData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\CurriculumFile;
 use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\EventTypeData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\FileData;
@@ -16,6 +17,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Data\MemberPage;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalPage;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfileOptionsData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\RecordedTransactionData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\RegisteredMemberData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\SystemData;
@@ -30,8 +32,10 @@ use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
  * @method static list<RegisteredMemberData> syncMembers(list<MemberData> $members)
  * @method static MemberPage searchMembers(?string $typology = null, ?string $search = null, ?int $perPage = null, ?string $cursor = null)
  * @method static ListedMemberData member(string $memberId)
- * @method static ProfessionalPage searchProfessionals(?string $typology = null, ?string $province = null, ?string $search = null, ?int $perPage = null, ?string $cursor = null)
+ * @method static ProfileOptionsData profileOptions()
+ * @method static ProfessionalPage searchProfessionals(?string $typology = null, ?string $province = null, ?string $search = null, ?int $perPage = null, ?string $cursor = null, ?string $centre = null, list<string> $competences = [], ?string $availability = null, ?string $workMode = null, ?string $qualification = null)
  * @method static ProfessionalData professional(string $professionalId)
+ * @method static CurriculumFile curriculum(string $professionalId)
  * @method static AcceptedEventData send(EnvelopeData $envelope)
  * @method static RecordedTransactionData transaction(string $id)
  * @method static void declareProfessional(string $taxCode, ProfessionalRecordData $record)

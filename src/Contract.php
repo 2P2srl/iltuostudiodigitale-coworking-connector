@@ -87,6 +87,11 @@ final class Contract
 
     public const int MAX_PER_PAGE = 100;
 
+    /**
+     * How many competences a search of the consultants may ask for together (rule N1).
+     */
+    public const int MAX_COMPETENCE_FILTERS = 20;
+
     public const int MAX_TRANSACTIONS = 500;
 
     /**
