@@ -264,7 +264,8 @@ final readonly class PlatformClient
      * (rule N7). The platform keeps the download (rule N5).
      *
      * @throws ProfessionalNotFoundException The consultant is not among those to find, or has no curriculum.
-     * @throws PlatformException Any other refusal, or no answer.
+     * @throws PlatformException Any other refusal.
+     * @throws ConnectionException The platform cannot be reached, after the retries.
      */
     public function curriculum(string $professionalId): CurriculumFile
     {
