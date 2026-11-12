@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Enums;
+namespace IlTuoStudioDigitale\CoworkingConnector\Enums;
 
 /**
  * Where an activity of a transaction stands: still to do, done or taken back (rule R14).

@@ -7,17 +7,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformEvent;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformProfessional;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\ProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformEvent;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformProfessional;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\ProfessionalOutbox;
 
 uses(RefreshDatabase::class);
 
@@ -31,7 +31,7 @@ beforeEach(function (): void {
 function send(string $reference): void
 {
     resolve(SendPlatformTransaction::class, ['reference' => $reference])->handle(
-        resolve(ITuoiProfessionistiDigitali\Connector\PlatformClient::class),
+        resolve(IlTuoStudioDigitale\CoworkingConnector\PlatformClient::class),
         resolve(ConnectorConfig::class),
         resolve(ProfessionalOutbox::class),
         resolve(EventOutbox::class),

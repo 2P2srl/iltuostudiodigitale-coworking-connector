@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Spatie\LaravelData\Data;
 

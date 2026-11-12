@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Http\Middleware;
+namespace IlTuoStudioDigitale\CoworkingConnector\Http\Middleware;
 
 use Carbon\CarbonImmutable;
 use Closure;
 use Illuminate\Http\Request;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\InvalidSignatureException;
-use ITuoiProfessionistiDigitali\Connector\Signature\WebhookSignature;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\InvalidSignatureException;
+use IlTuoStudioDigitale\CoworkingConnector\Signature\WebhookSignature;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

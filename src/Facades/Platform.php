@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Facades;
+namespace IlTuoStudioDigitale\CoworkingConnector\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use ITuoiProfessionistiDigitali\Connector\Data\AcceptedEventData;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\EventTypeData;
-use ITuoiProfessionistiDigitali\Connector\Data\FileData;
-use ITuoiProfessionistiDigitali\Connector\Data\FileReferenceData;
-use ITuoiProfessionistiDigitali\Connector\Data\ListedMemberData;
-use ITuoiProfessionistiDigitali\Connector\Data\MemberData;
-use ITuoiProfessionistiDigitali\Connector\Data\MemberPage;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalData;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalPage;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
-use ITuoiProfessionistiDigitali\Connector\Data\RecordedTransactionData;
-use ITuoiProfessionistiDigitali\Connector\Data\RegisteredMemberData;
-use ITuoiProfessionistiDigitali\Connector\Data\SystemData;
-use ITuoiProfessionistiDigitali\Connector\Data\TypologyData;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AcceptedEventData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EventTypeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\FileData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\FileReferenceData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ListedMemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\MemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\MemberPage;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalPage;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\RecordedTransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\RegisteredMemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\SystemData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TypologyData;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 /**
  * @method static SystemData system()

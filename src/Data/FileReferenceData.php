@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Carbon\CarbonImmutable;
-use ITuoiProfessionistiDigitali\Connector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;

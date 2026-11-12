@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\Data\MemberData;
-use ITuoiProfessionistiDigitali\Connector\Enums\SubjectType;
+use IlTuoStudioDigitale\CoworkingConnector\Data\MemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\SubjectType;
 
 it('M3: accepts an organization with a VAT number or a tax code, and a person with a personal tax code', function (array $overrides): void {
     expect(MemberData::validateAndCreate(member($overrides)))->toBeInstanceOf(MemberData::class);

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Events;
+namespace IlTuoStudioDigitale\CoworkingConnector\Events;
 
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\ReceivedFileData;
-use ITuoiProfessionistiDigitali\Connector\Data\RecordedTransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ReceivedFileData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\RecordedTransactionData;
 
 /**
  * An event delivered by the platform to the webhook, signature already verified.

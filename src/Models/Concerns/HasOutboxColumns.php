@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Models\Concerns;
+namespace IlTuoStudioDigitale\CoworkingConnector\Models\Concerns;
 
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
 
 /**
  * The columns the outboxes share: the revision kept and the one confirmed, the payload, the status and the last error.

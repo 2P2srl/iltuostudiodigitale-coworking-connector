@@ -5,15 +5,15 @@ declare(strict_types=1);
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\Data\ActivityDescriptionData;
-use ITuoiProfessionistiDigitali\Connector\Data\CompensationData;
-use ITuoiProfessionistiDigitali\Connector\Data\CounterpartyData;
-use ITuoiProfessionistiDigitali\Connector\Data\ProcessData;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionActivityData;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionData;
-use ITuoiProfessionistiDigitali\Connector\Enums\TransactionActivityStatus;
-use ITuoiProfessionistiDigitali\Connector\Enums\TransactionStatus;
-use ITuoiProfessionistiDigitali\Connector\Tests\Fixtures\NestedActivitiesData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ActivityDescriptionData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\CompensationData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\CounterpartyData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProcessData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionActivityData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\TransactionActivityStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\TransactionStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Tests\Fixtures\NestedActivitiesData;
 use Spatie\LaravelData\Data;
 
 /**

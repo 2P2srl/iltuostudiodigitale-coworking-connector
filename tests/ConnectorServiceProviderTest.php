@@ -6,12 +6,12 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\ConnectorServiceProvider;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
-use ITuoiProfessionistiDigitali\Connector\Http\Middleware\VerifyPlatformSignature;
-use ITuoiProfessionistiDigitali\Connector\Listeners\ReplyToPing;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorServiceProvider;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Http\Middleware\VerifyPlatformSignature;
+use IlTuoStudioDigitale\CoworkingConnector\Listeners\ReplyToPing;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 it('registers the webhook route behind the signature check', function (): void {
     $route = Route::getRoutes()->getByName('platform.webhook');

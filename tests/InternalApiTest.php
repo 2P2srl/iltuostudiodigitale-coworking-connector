@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Str;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\ProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\TransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\ProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\TransactionOutbox;
 
 /**
  * The public API: what the README describes and the applications use, a namespace when it ends with a backslash.
@@ -55,7 +55,7 @@ function packageClasses(): array
 
 it('marks @internal everything outside the public API', function (string $name): void {
     $isPublic = collect(PUBLIC_API)->contains(fn (string $public): bool => $public === $name || (str_ends_with($public, '\\') && str_starts_with($name, $public)));
-    $docComment = (string) (new ReflectionClass('ITuoiProfessionistiDigitali\\Connector\\'.$name))->getDocComment();
+    $docComment = (string) (new ReflectionClass('IlTuoStudioDigitale\\CoworkingConnector\\'.$name))->getDocComment();
 
     expect(str_contains($docComment, '@internal'))->toBe(!$isPublic);
 })->with(packageClasses());

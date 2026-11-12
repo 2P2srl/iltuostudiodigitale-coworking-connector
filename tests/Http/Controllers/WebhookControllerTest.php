@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Testing\TestResponse;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
-use ITuoiProfessionistiDigitali\Connector\Jobs\ReceivePlatformEvent;
-use ITuoiProfessionistiDigitali\Connector\Signature\WebhookSignature;
-use ITuoiProfessionistiDigitali\Connector\Tests\TestCase;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\ReceivePlatformEvent;
+use IlTuoStudioDigitale\CoworkingConnector\Signature\WebhookSignature;
+use IlTuoStudioDigitale\CoworkingConnector\Tests\TestCase;
 
 uses(RefreshDatabase::class);
 
@@ -71,7 +71,7 @@ it('W5: answers 2xx to an event without sender, which the package does not know,
 
     Event::assertNotDispatched(PlatformEventReceived::class);
     Log::shouldHaveReceived('warning')->once()->with(
-        'Evento del portale di un tipo o di una versione sconosciuti al pacchetto: ignorato. Aggiorna ituoiprofessionistidigitali/connector.',
+        'Evento del portale di un tipo o di una versione sconosciuti al pacchetto: ignorato. Aggiorna iltuostudiodigitale/coworking-connector.',
         ['event_id' => envelope()['event_id'], 'type' => $type, 'schema_version' => $version],
     );
 })->with([

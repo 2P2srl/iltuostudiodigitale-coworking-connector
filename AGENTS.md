@@ -1,6 +1,6 @@
-# Istruzioni per agenti AI: connettore di I tuoi professionisti digitali
+# Istruzioni per agenti AI: connettore del coworking di Il tuo studio digitale
 
-Regole per chi scrive codice che usa `ituoiprofessionistidigitali/connector` in un sistema collegato al portale. Il contratto completo è `docs/contratto.md` nel repo del portale: il portale ne è l'autorità e il sistema si adegua, mai il contrario.
+Regole per chi scrive codice che usa `iltuostudiodigitale/coworking-connector` in un sistema collegato al portale. Il contratto completo è `docs/contratto.md` nel repo del portale: il portale ne è l'autorità e il sistema si adegua, mai il contrario.
 
 ## Non aggirare il pacchetto
 
@@ -98,11 +98,11 @@ Regole per chi scrive codice che usa `ituoiprofessionistidigitali/connector` in 
 ```php
 arch('assignments reach the register of the platform')
     ->expect(App\Models\P2pExternalAssignmentProposal::class)
-    ->toImplement(ITuoiProfessionistiDigitali\Connector\Contracts\RecordsPlatformTransaction::class)
-    ->toUseTrait(ITuoiProfessionistiDigitali\Connector\Concerns\RecordsOnPlatform::class);
+    ->toImplement(IlTuoStudioDigitale\CoworkingConnector\Contracts\RecordsPlatformTransaction::class)
+    ->toUseTrait(IlTuoStudioDigitale\CoworkingConnector\Concerns\RecordsOnPlatform::class);
 ```
 
-- Nei test di ogni action che tocca un invio, le sue righe o l'incarico, verifica la comunicazione con `ITuoiProfessionistiDigitali\Connector\Testing\PlatformOutbox::assertRecorded($proposta)`, e con `assertNotRecorded()` che una bozza non parta.
+- Nei test di ogni action che tocca un invio, le sue righe o l'incarico, verifica la comunicazione con `IlTuoStudioDigitale\CoworkingConnector\Testing\PlatformOutbox::assertRecorded($proposta)`, e con `assertNotRecorded()` che una bozza non parta.
 
 ## Anagrafica dei professionisti
 

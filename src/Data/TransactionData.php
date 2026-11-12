@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Carbon\CarbonImmutable;
 use Closure;
 use Illuminate\Validation\Rule;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Enums\TransactionActivityStatus;
-use ITuoiProfessionistiDigitali\Connector\Enums\TransactionStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\TransactionActivityStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\TransactionStatus;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Attributes\WithoutValidation;

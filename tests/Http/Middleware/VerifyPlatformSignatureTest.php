@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Event;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
-use ITuoiProfessionistiDigitali\Connector\Signature\WebhookSignature;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Signature\WebhookSignature;
 
 beforeEach(function (): void {
     CarbonImmutable::setTestNow('2026-10-07 15:30:00');

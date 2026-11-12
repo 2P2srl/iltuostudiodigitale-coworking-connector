@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Models;
+namespace IlTuoStudioDigitale\CoworkingConnector\Models;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
 
 /**
  * An event of a member of the system to send to the platform, kept before sending it, and what the platform answered.

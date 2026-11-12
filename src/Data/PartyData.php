@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
-use ITuoiProfessionistiDigitali\Connector\Validation\Rules\ItalianTaxCode;
-use ITuoiProfessionistiDigitali\Connector\Validation\Rules\ItalianVatNumber;
+use IlTuoStudioDigitale\CoworkingConnector\Validation\Rules\ItalianTaxCode;
+use IlTuoStudioDigitale\CoworkingConnector\Validation\Rules\ItalianVatNumber;
 use Spatie\LaravelData\Data;
 
 /**

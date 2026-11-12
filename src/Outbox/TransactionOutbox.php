@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Outbox;
+namespace IlTuoStudioDigitale\CoworkingConnector\Outbox;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Contracts\RecordsPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionActivityData;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionData;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Contracts\RecordsPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionActivityData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
 
 /**
  * Keeps the last version of every transaction and sends it after the commit, with a new revision

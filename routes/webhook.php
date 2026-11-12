@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Http\Controllers\WebhookController;
-use ITuoiProfessionistiDigitali\Connector\Http\Middleware\VerifyPlatformSignature;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Http\Controllers\WebhookController;
+use IlTuoStudioDigitale\CoworkingConnector\Http\Middleware\VerifyPlatformSignature;
 
 $path = resolve(ConnectorConfig::class)->webhookPath;
 

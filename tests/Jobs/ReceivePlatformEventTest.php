@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Sleep;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\FileIntegrityException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\TransactionNotFoundException;
-use ITuoiProfessionistiDigitali\Connector\Jobs\ReceivePlatformEvent;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileIntegrityException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\TransactionNotFoundException;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\ReceivePlatformEvent;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 const RECEIVED_CONTENT = "%PDF-1.7\nGuida ricevuta\n";
 
@@ -37,7 +37,7 @@ beforeEach(function (): void {
 
 function receive(): void
 {
-    new ReceivePlatformEvent(ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData::from(test()->envelope))->handle(resolve(PlatformClient::class), resolve(ITuoiProfessionistiDigitali\Connector\ConnectorConfig::class), resolve(Illuminate\Contracts\Events\Dispatcher::class));
+    new ReceivePlatformEvent(IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData::from(test()->envelope))->handle(resolve(PlatformClient::class), resolve(IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig::class), resolve(Illuminate\Contracts\Events\Dispatcher::class));
 }
 
 function platformServing(mixed $download, mixed $receipt = null): void
@@ -103,12 +103,12 @@ it('F8: saves and confirms nothing, and does not hand the event, when the downlo
 });
 
 it('F9: keeps trying until the files are available, one job per event', function (): void {
-    $job = new ReceivePlatformEvent(ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData::from($this->envelope));
+    $job = new ReceivePlatformEvent(IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData::from($this->envelope));
 
     expect($job->uniqueId())->toBe(envelope()['event_id'])
         ->and($job->backoff())->toBe([60, 300, 900, 1800, 3600])
         ->and($job->retryUntil()->toIso8601ZuluString())->toBe('2026-11-15T10:00:00Z')
-        ->and(new ReceivePlatformEvent(ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData::from(envelope(['files' => [[...$this->envelope['files'][0], 'available_until' => null]]])))->retryUntil()->toIso8601ZuluString())->toBe('2026-11-15T10:00:00Z');
+        ->and(new ReceivePlatformEvent(IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData::from(envelope(['files' => [[...$this->envelope['files'][0], 'available_until' => null]]])))->retryUntil()->toIso8601ZuluString())->toBe('2026-11-15T10:00:00Z');
 });
 
 it('E13: hands an offer to the application with the transaction offered, as the register has it', function (): void {

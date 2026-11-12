@@ -6,11 +6,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformEvent;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformEvent;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
 
 uses(RefreshDatabase::class);
 

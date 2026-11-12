@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Exceptions;
+namespace IlTuoStudioDigitale\CoworkingConnector\Exceptions;
 
 /**
  * The 404 of GET /professionals/{id}: the id is unknown, or the consultant is not among those the firms may find, for

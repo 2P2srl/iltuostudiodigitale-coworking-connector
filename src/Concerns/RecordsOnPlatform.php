@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Concerns;
+namespace IlTuoStudioDigitale\CoworkingConnector\Concerns;
 
-use ITuoiProfessionistiDigitali\Connector\Contracts\RecordsPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Outbox\TransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Contracts\RecordsPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\TransactionOutbox;
 use LogicException;
 
 /**

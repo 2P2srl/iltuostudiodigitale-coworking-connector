@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://ituoiprofessionistidigitali.it/contract/event-types/coworking.assignment_revoked/1.json",
+    "$id": "https://coworking.iltuostudiodigitale.it/contract/event-types/coworking.assignment_revoked/1.json",
     "title": "coworking.assignment_revoked v1",
     "description": "Il committente revoca l'incarico, prima o dopo la risposta dello studio, dopo averlo registrato revoked. revoked_at è il closed_at della transazione.",
     "type": "object",

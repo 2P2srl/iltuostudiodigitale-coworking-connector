@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use ITuoiProfessionistiDigitali\Connector\Data\MemberData;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\MemberNotFoundException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Facades\Platform;
+use IlTuoStudioDigitale\CoworkingConnector\Data\MemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\MemberNotFoundException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Facades\Platform;
 
 beforeEach(function (): void {
     Http::preventStrayRequests();

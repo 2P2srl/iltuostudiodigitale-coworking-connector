@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Http\Controllers;
+namespace IlTuoStudioDigitale\CoworkingConnector\Http\Controllers;
 
 use Exception;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -10,11 +10,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
-use ITuoiProfessionistiDigitali\Connector\Jobs\ReceivePlatformEvent;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\ReceivePlatformEvent;
 use TypeError;
 
 /**
@@ -50,7 +50,7 @@ final readonly class WebhookController
 
         if ($envelope->sender === null)
         {
-            Log::warning('Evento del portale di un tipo o di una versione sconosciuti al pacchetto: ignorato. Aggiorna ituoiprofessionistidigitali/connector.', [
+            Log::warning('Evento del portale di un tipo o di una versione sconosciuti al pacchetto: ignorato. Aggiorna iltuostudiodigitale/coworking-connector.', [
                 'event_id' => $envelope->event_id,
                 'type' => $envelope->type,
                 'schema_version' => $envelope->schema_version,

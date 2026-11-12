@@ -5,8 +5,8 @@ declare(strict_types=1);
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
 
 it('E1: makes an event with a fresh UUID v7 and the current time', function (): void {
     CarbonImmutable::setTestNow('2026-10-07 15:30:00');

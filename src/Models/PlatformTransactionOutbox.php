@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Models;
+namespace IlTuoStudioDigitale\CoworkingConnector\Models;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Models\Concerns\HasOutboxColumns;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Models\Concerns\HasOutboxColumns;
 
 /**
  * The last version of a transaction to send to the register, and what the platform answered.

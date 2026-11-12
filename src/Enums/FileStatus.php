@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Enums;
+namespace IlTuoStudioDigitale\CoworkingConnector\Enums;
 
 /**
  * Where a file is in its passage through the platform (rules F5, F8 and F9).

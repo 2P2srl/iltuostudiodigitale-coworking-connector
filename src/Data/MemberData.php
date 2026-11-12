@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Illuminate\Validation\Rule;
-use ITuoiProfessionistiDigitali\Connector\Enums\SubjectType;
-use ITuoiProfessionistiDigitali\Connector\Validation\Rules\ItalianTaxCode;
-use ITuoiProfessionistiDigitali\Connector\Validation\Rules\ItalianVatNumber;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\SubjectType;
+use IlTuoStudioDigitale\CoworkingConnector\Validation\Rules\ItalianTaxCode;
+use IlTuoStudioDigitale\CoworkingConnector\Validation\Rules\ItalianVatNumber;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 

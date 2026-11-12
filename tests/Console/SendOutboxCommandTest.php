@@ -5,14 +5,14 @@ declare(strict_types=1);
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformEvent;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformProfessional;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformEvent;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformProfessional;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
 
 uses(RefreshDatabase::class);
 

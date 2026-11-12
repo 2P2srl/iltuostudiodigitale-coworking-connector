@@ -1,6 +1,6 @@
-# I tuoi professionisti digitali: connector
+# Il tuo studio digitale: connettore del coworking
 
-Il contratto di [I tuoi professionisti digitali](https://ituoiprofessionistidigitali.it) in forma di codice, per i sistemi Laravel che si collegano al portale: DTO, client, firma dei webhook, validazione dei payload e comando di installazione.
+Il contratto del [coworking di Il tuo studio digitale](https://coworking.iltuostudiodigitale.it) in forma di codice, per i sistemi Laravel che si collegano al portale: DTO, client, firma dei webhook, validazione dei payload e comando di installazione.
 
 Il portale è l'autorità sul contratto. Il pacchetto lo segue: se un dato non rispetta il contratto, la richiesta non parte. Il contratto completo, con ogni regola e il suo codice (E6, W4…), è `docs/contratto.md` nel repo del portale.
 
@@ -11,7 +11,7 @@ PHP 8.4 o 8.5, Laravel 13.
 ## Installazione
 
 ```bash
-composer require ituoiprofessionistidigitali/connector
+composer require iltuostudiodigitale/coworking-connector
 php artisan platform:install
 ```
 
@@ -22,7 +22,7 @@ Il comando pubblica `config/platform.php` e deposita le istruzioni per gli agent
 Le rilascia l'operatore del portale, che le vede una volta sola:
 
 ```dotenv
-PLATFORM_URL=https://staging.ituoiprofessionistidigitali.it
+PLATFORM_URL=https://coworking-staging.iltuostudiodigitale.it
 PLATFORM_CLIENT_ID=0199b6ef-…
 PLATFORM_CLIENT_SECRET=…
 PLATFORM_SIGNING_SECRET=…
@@ -42,7 +42,7 @@ Senza queste chiavi il sistema non è collegato e nulla si rompe: `ConnectorConf
 ## Collegamento
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Facades\Platform;
+use IlTuoStudioDigitale\CoworkingConnector\Facades\Platform;
 
 // Dopo il deploy, o quando cambia l'URL del webhook
 $system = Platform::present(route('platform.webhook'));
@@ -55,7 +55,7 @@ La verifica la gestisce il pacchetto: la rotta `platform.webhook` risponde alla 
 ## Aderenti
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Data\MemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\MemberData;
 
 $members = Platform::syncMembers([
     MemberData::validateAndCreate([
@@ -89,7 +89,7 @@ $next = Platform::searchMembers(typology: 'commercialisti', cursor: $page->nextC
 `searchMembers()` non mostra mai il codice fiscale, `external_ref` né il sistema (M11, M12). Un aderente di un altro sistema si legge anche per id, per esempio il committente di un'offerta ricevuta (M16):
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Exceptions\MemberNotFoundException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\MemberNotFoundException;
 
 $committente = Platform::member($envelope->sender);   // ListedMemberData
 ```
@@ -99,7 +99,7 @@ Risponde per un aderente pubblicato di un altro sistema attivo, o legato al sist
 ## Eventi
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
 
 $ping = EnvelopeData::make(
     type: 'platform.ping',
@@ -119,7 +119,7 @@ L'outbox degli eventi lo fa per te. Chiama `queue()` nella stessa transazione de
 
 ```php
 use Illuminate\Support\Facades\DB;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
 
 DB::transaction(function () use ($busta, $incarico): void {
     $incarico->save();
@@ -137,7 +137,7 @@ Per ricevere, ascolta `PlatformEventReceived`, in coda e in modo idempotente su 
 
 ```php
 use Illuminate\Contracts\Queue\ShouldQueue;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
 
 final class HandlePlatformEvent implements ShouldQueue
 {
@@ -175,8 +175,8 @@ A può revocare finché l'incarico non è concluso, prima o dopo la risposta: re
 Ogni evento ha `correlation_id` uguale all'id della transazione e la sua tipologia. L'id lo dà il pacchetto alla transazione dal primo salvataggio: `$model->platformTransactionId()` (R23).
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Data\AssignmentOfferedData;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AssignmentOfferedData;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
 
 DB::transaction(function () use ($proposta): void {
     $proposta->save();   // RecordsOnPlatform: la transazione invited entra nella outbox, con il suo id
@@ -201,7 +201,7 @@ DB::transaction(function () use ($proposta): void {
 Un evento fra studi può portare documenti, come gli allegati delle guide di `coworking.activities_assigned`. Il file non viaggia nella busta: sta sul portale per il tempo del transito, e l'evento lo cita con il suo id, nel payload e in `files` della busta (E12, F1–F11).
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Facades\Platform;
+use IlTuoStudioDigitale\CoworkingConnector\Facades\Platform;
 
 $file = Platform::uploadFile(
     uploadId: (string) Str::uuid7(),          // la chiave di idempotenza (F2): salvala per i nuovi tentativi
@@ -225,7 +225,7 @@ Platform::fileStatus($file->id);              // FileData con lo stato: uploaded
 Con l'outbox degli eventi non serve caricare a mano. Ogni file del sistema è un `OutgoingFileData` con un `ref` provvisorio: citalo nel payload dove andrebbe l'id del file, e passa i file a `queue()`.
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Data\OutgoingFileData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\OutgoingFileData;
 
 $allegato = OutgoingFileData::make('s3', 'guide/fatture.pdf', 'Guida registrazione fatture.pdf', 'application/pdf');
 
@@ -300,9 +300,9 @@ La parte ferma all'invio (controparte, tipologia, testi, prezzi) non cambia fra 
 Il modello che corrisponde all'invio lo dichiara con un'interfaccia, e il pacchetto fa il resto:
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Concerns\RecordsOnPlatform;
-use ITuoiProfessionistiDigitali\Connector\Contracts\RecordsPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Concerns\RecordsOnPlatform;
+use IlTuoStudioDigitale\CoworkingConnector\Contracts\RecordsPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
 
 final class ExternalAssignmentProposal extends Model implements RecordsPlatformTransaction
 {
@@ -323,8 +323,8 @@ final class ExternalAssignmentProposal extends Model implements RecordsPlatformT
 I modelli che cambiano la transazione senza esserlo, come le sue righe o l'incarico che la contiene, la registrano di nuovo a ogni salvataggio ed eliminazione:
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Concerns\RecordsAffectedOnPlatform;
-use ITuoiProfessionistiDigitali\Connector\Contracts\AffectsPlatformTransactions;
+use IlTuoStudioDigitale\CoworkingConnector\Concerns\RecordsAffectedOnPlatform;
+use IlTuoStudioDigitale\CoworkingConnector\Contracts\AffectsPlatformTransactions;
 
 final class ExternalAssignmentActivity extends Model implements AffectsPlatformTransactions
 {
@@ -372,8 +372,8 @@ $controparte = $consulente->toCounterparty();
 Il professionista è uno per codice fiscale in tutto il portale. Nasce dalla prima registrazione di un incarico a persona, con l'anagrafica dell'invio. Quando poi l'anagrafica cambia nel sistema, il sistema la dichiara con `PUT /professionals/{tax_code}` (regola R18), datata dal momento del cambio: vince la dichiarazione più recente, non l'ultima arrivata (R19). Le transazioni non cambiano: ognuna conserva l'anagrafica del suo invio (R13).
 
 ```php
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
-use ITuoiProfessionistiDigitali\Connector\Outbox\ProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\ProfessionalOutbox;
 
 resolve(ProfessionalOutbox::class)->declare($collaboratore->codice_fiscale, new ProfessionalRecordData(
     first_name: 'Mario',

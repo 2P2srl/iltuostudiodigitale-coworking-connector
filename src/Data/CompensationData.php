@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Illuminate\Validation\Rule;
-use ITuoiProfessionistiDigitali\Connector\Enums\CompensationForm;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\CompensationForm;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Tests\Fixtures;
+namespace IlTuoStudioDigitale\CoworkingConnector\Tests\Fixtures;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use ITuoiProfessionistiDigitali\Connector\Concerns\RecordsOnPlatform;
-use ITuoiProfessionistiDigitali\Connector\Contracts\RecordsPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Concerns\RecordsOnPlatform;
+use IlTuoStudioDigitale\CoworkingConnector\Contracts\RecordsPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
 
 /**
  * A proposal of an external assignment as a system would keep it: a sending with its activities,

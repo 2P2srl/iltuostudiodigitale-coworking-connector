@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Tests;
+namespace IlTuoStudioDigitale\CoworkingConnector\Tests;
 
 use Illuminate\Foundation\Application;
-use ITuoiProfessionistiDigitali\Connector\ConnectorServiceProvider;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Override;
 use Spatie\LaravelData\LaravelDataServiceProvider;

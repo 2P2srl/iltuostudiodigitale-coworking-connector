@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Jobs;
+namespace IlTuoStudioDigitale\CoworkingConnector\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionData;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Jobs\Concerns\SendsOutboxRow;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\ProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\Concerns\SendsOutboxRow;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\ProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 /**
  * Sends the last version of a transaction to the register. Network errors and a system not yet active are retried;

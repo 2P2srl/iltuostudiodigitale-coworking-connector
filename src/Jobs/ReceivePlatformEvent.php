@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Jobs;
+namespace IlTuoStudioDigitale\CoworkingConnector\Jobs;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -10,16 +10,16 @@ use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Storage;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\AssignmentOfferedData;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\FileReferenceData;
-use ITuoiProfessionistiDigitali\Connector\Data\ReceivedFileData;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\FileGoneException;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
-use ITuoiProfessionistiDigitali\Connector\Support\FileHash;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AssignmentOfferedData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\FileReferenceData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ReceivedFileData;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileGoneException;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\Support\FileHash;
 
 /**
  * Prepares, out of the ten seconds of the webhook, what an event needs before the application sees it: its files, and

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector;
+namespace IlTuoStudioDigitale\CoworkingConnector;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
-use ITuoiProfessionistiDigitali\Connector\Console\InstallCommand;
-use ITuoiProfessionistiDigitali\Connector\Console\SendOutboxCommand;
-use ITuoiProfessionistiDigitali\Connector\Events\PlatformEventReceived;
-use ITuoiProfessionistiDigitali\Connector\Listeners\ReplyToPing;
+use IlTuoStudioDigitale\CoworkingConnector\Console\InstallCommand;
+use IlTuoStudioDigitale\CoworkingConnector\Console\SendOutboxCommand;
+use IlTuoStudioDigitale\CoworkingConnector\Events\PlatformEventReceived;
+use IlTuoStudioDigitale\CoworkingConnector\Listeners\ReplyToPing;
 
 /**
  * Wires the package into the application: configuration, client, routes, listeners, commands and schedule.

@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Jobs;
+namespace IlTuoStudioDigitale\CoworkingConnector\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\ProfessionalNotAssignedException;
-use ITuoiProfessionistiDigitali\Connector\Jobs\Concerns\SendsOutboxRow;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\ProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\ProfessionalNotAssignedException;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\Concerns\SendsOutboxRow;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\ProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 /**
  * Sends the latest declaration of the record of a professional (rule R18). A 404 waits while transactions to

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Jobs;
+namespace IlTuoStudioDigitale\CoworkingConnector\Jobs;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,19 +10,19 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\FileData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\FileStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\Concerns\SendsOutboxRow;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutboxFile;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\Support\FileHash;
 use InvalidArgumentException;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\FileData;
-use ITuoiProfessionistiDigitali\Connector\Enums\FileStatus;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Jobs\Concerns\SendsOutboxRow;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutboxFile;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
-use ITuoiProfessionistiDigitali\Connector\Support\FileHash;
 
 /**
  * Sends an event kept in the outbox, always the same envelope: after a timeout the platform answers 200 without

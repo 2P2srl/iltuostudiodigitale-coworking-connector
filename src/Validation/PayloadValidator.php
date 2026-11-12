@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Validation;
+namespace IlTuoStudioDigitale\CoworkingConnector\Validation;
 
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\EventTypeData;
-use ITuoiProfessionistiDigitali\Connector\Enums\EventSender;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EventTypeData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\EventSender;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
 use Opis\JsonSchema\Errors\ErrorFormatter;
 use Opis\JsonSchema\Helper;
 use Opis\JsonSchema\Validator;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Exceptions;
+namespace IlTuoStudioDigitale\CoworkingConnector\Exceptions;
 
 /**
  * The 404 of GET /members/{id}: not a listed member of another active system, nor one linked to the system by a

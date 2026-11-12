@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Validator;
-use ITuoiProfessionistiDigitali\Connector\Validation\Rules\ItalianVatNumber;
+use IlTuoStudioDigitale\CoworkingConnector\Validation\Rules\ItalianVatNumber;
 
 it('M4: checks the check digit of a VAT number', function (mixed $value, bool $isValid): void {
     expect(Validator::make(['vat' => $value], ['vat' => [new ItalianVatNumber]])->passes())->toBe($isValid);

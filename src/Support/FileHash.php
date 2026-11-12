@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Support;
+namespace IlTuoStudioDigitale\CoworkingConnector\Support;
 
 use Illuminate\Support\Facades\Storage;
 use InvalidArgumentException;

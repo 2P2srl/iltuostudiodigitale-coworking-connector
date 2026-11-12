@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Contracts;
+namespace IlTuoStudioDigitale\CoworkingConnector\Contracts;
 
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
 
 /**
  * A model that is a transaction of the register: every change must reach the platform (rule R9).

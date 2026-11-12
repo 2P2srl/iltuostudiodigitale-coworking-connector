@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use ITuoiProfessionistiDigitali\Connector\Data\EventTypeData;
-use ITuoiProfessionistiDigitali\Connector\Data\EventTypeVersionData;
-use ITuoiProfessionistiDigitali\Connector\Data\ListedMemberData;
-use ITuoiProfessionistiDigitali\Connector\Data\MemberPage;
-use ITuoiProfessionistiDigitali\Connector\Data\SystemData;
-use ITuoiProfessionistiDigitali\Connector\Enums\EventSender;
-use ITuoiProfessionistiDigitali\Connector\Enums\SystemStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EventTypeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EventTypeVersionData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ListedMemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\MemberPage;
+use IlTuoStudioDigitale\CoworkingConnector\Data\SystemData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\EventSender;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\SystemStatus;
 
 it('C3: finds a version of an event type and the typologies it allows', function (): void {
     $forEveryone = EventTypeData::from(catalogue()[0]);

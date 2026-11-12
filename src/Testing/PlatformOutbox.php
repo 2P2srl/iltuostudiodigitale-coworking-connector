@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Testing;
+namespace IlTuoStudioDigitale\CoworkingConnector\Testing;
 
 use Closure;
 use Illuminate\Support\Collection;
-use ITuoiProfessionistiDigitali\Connector\Contracts\RecordsPlatformTransaction;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\TransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Contracts\RecordsPlatformTransaction;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\TransactionOutbox;
 use PHPUnit\Framework\Assert;
 
 /**

@@ -10,7 +10,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | L'indirizzo base, senza `/api/v1`: per esempio
-    | `https://staging.ituoiprofessionistidigitali.it`. Senza indirizzo e
+    | `https://coworking-staging.iltuostudiodigitale.it`. Senza indirizzo e
     | credenziali il sistema non è collegato e il client non parte.
     |
     */

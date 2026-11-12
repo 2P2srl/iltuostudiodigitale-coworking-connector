@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector;
+namespace IlTuoStudioDigitale\CoworkingConnector;
 
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformNotConfiguredException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformNotConfiguredException;
 
 /**
  * The package configuration, typed once instead of read as mixed everywhere.

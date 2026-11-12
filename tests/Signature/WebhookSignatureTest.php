@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use ITuoiProfessionistiDigitali\Connector\Exceptions\InvalidSignatureException;
-use ITuoiProfessionistiDigitali\Connector\Signature\WebhookSignature;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\InvalidSignatureException;
+use IlTuoStudioDigitale\CoworkingConnector\Signature\WebhookSignature;
 
 const BODY = '{"event_id":"0199b6f2-6d7e-7c41-9a3e-5f2b8c1d4e60"}';
 const NOW = 1_791_380_000;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Exceptions;
+namespace IlTuoStudioDigitale\CoworkingConnector\Exceptions;
 
 /**
  * The 410 of a download: the file expired, or the recipient already confirmed it (rules F8 and F9). If the document

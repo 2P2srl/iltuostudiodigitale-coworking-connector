@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\MemberData;
-use ITuoiProfessionistiDigitali\Connector\Enums\EventStatus;
-use ITuoiProfessionistiDigitali\Connector\Enums\SystemStatus;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformNotConfiguredException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Facades\Platform;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\MemberData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\EventStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\SystemStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformNotConfiguredException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Facades\Platform;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 const TOKEN_URL = 'platform.test/oauth/token';
 
@@ -157,7 +157,7 @@ it('C3: reads the event types with versions and schemas', function (): void {
     $eventTypes = Platform::eventTypes();
 
     expect($eventTypes)->toHaveCount(2)
-        ->and($eventTypes[0]->version(1)?->schema['$id'])->toBe('https://ituoiprofessionistidigitali.it/contract/event-types/platform.ping/1.json');
+        ->and($eventTypes[0]->version(1)?->schema['$id'])->toBe('https://coworking.iltuostudiodigitale.it/contract/event-types/platform.ping/1.json');
 });
 
 it('M7: publishes the complete list of members and returns their ids', function (): void {

@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\ActivitiesAssignedData;
-use ITuoiProfessionistiDigitali\Connector\Data\ActivityStatusData;
-use ITuoiProfessionistiDigitali\Connector\Data\AssignmentAcceptedData;
-use ITuoiProfessionistiDigitali\Connector\Data\AssignmentDeclinedData;
-use ITuoiProfessionistiDigitali\Connector\Data\AssignmentOfferedData;
-use ITuoiProfessionistiDigitali\Connector\Data\AssignmentRevokedData;
-use ITuoiProfessionistiDigitali\Connector\Data\ContractDetailsData;
-use ITuoiProfessionistiDigitali\Connector\Enums\ActivityStatusChange;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ActivitiesAssignedData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ActivityStatusData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AssignmentAcceptedData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AssignmentDeclinedData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AssignmentOfferedData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AssignmentRevokedData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ContractDetailsData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\ActivityStatusChange;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
 
 const COWORKING_TRANSACTION = '0199b6f5-0000-7000-8000-000000000001';
 

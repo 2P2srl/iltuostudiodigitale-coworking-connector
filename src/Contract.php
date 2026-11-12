@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector;
+namespace IlTuoStudioDigitale\CoworkingConnector;
 
 /**
  * The fixed values of the contract, as written in `docs/contratto.md` of the platform.

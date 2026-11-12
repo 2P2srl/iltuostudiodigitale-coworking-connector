@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Outbox;
+namespace IlTuoStudioDigitale\CoworkingConnector\Outbox;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformProfessional;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformProfessional;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
 
 /**
  * Keeps the latest declaration of the record of every professional and sends it after the commit (rules R18 and R19).

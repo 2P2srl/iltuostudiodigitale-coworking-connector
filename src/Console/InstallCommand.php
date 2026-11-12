@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Console;
+namespace IlTuoStudioDigitale\CoworkingConnector\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -18,7 +18,7 @@ final class InstallCommand extends Command
 {
     protected $signature = 'platform:install {--force : Sovrascrive i file già presenti}';
 
-    protected $description = 'Pubblica la configurazione del connettore di I tuoi professionisti digitali e le istruzioni per gli agenti AI';
+    protected $description = 'Pubblica la configurazione del connettore del coworking di Il tuo studio digitale e le istruzioni per gli agenti AI';
 
     public function handle(Filesystem $files): int
     {
@@ -29,7 +29,7 @@ final class InstallCommand extends Command
 
         $this->writeAgentRules($files);
 
-        $this->components->info('Connettore di I tuoi professionisti digitali installato.');
+        $this->components->info('Connettore del coworking di Il tuo studio digitale installato.');
         $this->components->bulletList([
             'Compila PLATFORM_URL, PLATFORM_CLIENT_ID, PLATFORM_CLIENT_SECRET e PLATFORM_SIGNING_SECRET nel .env',
             'Le credenziali le rilascia l\'operatore del portale e si vedono una volta sola',

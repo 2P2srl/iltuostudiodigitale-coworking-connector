@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Contracts;
+namespace IlTuoStudioDigitale\CoworkingConnector\Contracts;
 
 /**
  * A model whose changes change transactions of the register without being one: an activity of a sending,

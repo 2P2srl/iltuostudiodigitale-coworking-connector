@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
-use ITuoiProfessionistiDigitali\Connector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
 use LogicException;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Attributes\WithTransformer;

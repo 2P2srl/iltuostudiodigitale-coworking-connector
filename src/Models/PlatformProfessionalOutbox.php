@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Models;
+namespace IlTuoStudioDigitale\CoworkingConnector\Models;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Models\Concerns\HasOutboxColumns;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Models\Concerns\HasOutboxColumns;
 
 /**
  * The latest declaration of the record of a professional to send to the platform, and what the platform answered.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Signature;
+namespace IlTuoStudioDigitale\CoworkingConnector\Signature;
 
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\InvalidSignatureException;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\InvalidSignatureException;
 
 /**
  * The signature of the webhooks: `v1=` and the HMAC-SHA256 of `timestamp.body` (rule W3).

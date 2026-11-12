@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Sleep;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\ActivitiesAssignedData;
-use ITuoiProfessionistiDigitali\Connector\Data\EnvelopeData;
-use ITuoiProfessionistiDigitali\Connector\Data\OutgoingFileData;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Jobs\SendPlatformEvent;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutboxFile;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
-use ITuoiProfessionistiDigitali\Connector\PlatformClient;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ActivitiesAssignedData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\EnvelopeData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\OutgoingFileData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Jobs\SendPlatformEvent;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutboxFile;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 uses(RefreshDatabase::class);
 
@@ -132,7 +132,7 @@ it('F5: after an event that may have arrived, sends the same envelope again when
         'platform.test/api/v1/events' => Http::sequence()->push(['message' => 'Errore.'], 503)->push(['message' => 'Errore.'], 503)->push(['message' => 'Errore.'], 503)->push(acceptedWithFiles(), 200),
     ]);
 
-    expect(fn () => sendEventWithFiles())->toThrow(ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException::class);
+    expect(fn () => sendEventWithFiles())->toThrow(IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException::class);
     sendEventWithFiles();
 
     expect($this->row->refresh()->status)->toBe(OutboxStatus::Sent);

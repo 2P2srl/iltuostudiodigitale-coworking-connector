@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Exceptions;
+namespace IlTuoStudioDigitale\CoworkingConnector\Exceptions;
 
 final class PlatformNotConfiguredException extends PlatformException
 {

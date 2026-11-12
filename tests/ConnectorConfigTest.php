@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformNotConfiguredException;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformNotConfiguredException;
 
 it('types the configuration of the package', function (): void {
     $config = ConnectorConfig::fromArray([

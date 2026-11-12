@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use ITuoiProfessionistiDigitali\Connector\Data\TransactionData;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\ProfessionalNotFoundException;
-use ITuoiProfessionistiDigitali\Connector\Facades\Platform;
+use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\ProfessionalNotFoundException;
+use IlTuoStudioDigitale\CoworkingConnector\Facades\Platform;
 
 const CONSULTANT = '0199c2b0-0000-7000-8000-000000000001';
 

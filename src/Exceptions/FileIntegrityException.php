@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Exceptions;
+namespace IlTuoStudioDigitale\CoworkingConnector\Exceptions;
 
 /**
  * A downloaded file whose SHA-256 is not the one of the envelope: nothing is saved nor confirmed (rule F8).

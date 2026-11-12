@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
-use ITuoiProfessionistiDigitali\Connector\Enums\TransactionResult;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\TransactionResult;
 use Spatie\LaravelData\Data;
 
 /**

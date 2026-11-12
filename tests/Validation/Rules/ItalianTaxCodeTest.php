@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Validator;
-use ITuoiProfessionistiDigitali\Connector\Validation\Rules\ItalianTaxCode;
+use IlTuoStudioDigitale\CoworkingConnector\Validation\Rules\ItalianTaxCode;
 
 it('M4: checks the check character of a tax code', function (mixed $value, bool $personOnly, bool $isValid): void {
     expect(Validator::make(['cf' => $value], ['cf' => [new ItalianTaxCode($personOnly)]])->passes())->toBe($isValid);

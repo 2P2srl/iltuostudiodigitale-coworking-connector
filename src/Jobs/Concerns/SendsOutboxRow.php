@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Jobs\Concerns;
+namespace IlTuoStudioDigitale\CoworkingConnector\Jobs\Concerns;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\ConnectorConfig;
-use ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformProfessionalOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\ConnectorConfig;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformProfessionalOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
 
 /**
  * What the jobs of the outboxes share: the retries, the wait for the connection, the refusals and the confirmation

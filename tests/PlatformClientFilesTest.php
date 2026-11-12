@@ -7,12 +7,12 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Sleep;
-use ITuoiProfessionistiDigitali\Connector\Data\FileReferenceData;
-use ITuoiProfessionistiDigitali\Connector\Enums\FileStatus;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\FileGoneException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\FileIntegrityException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Facades\Platform;
+use IlTuoStudioDigitale\CoworkingConnector\Data\FileReferenceData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\FileStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileGoneException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileIntegrityException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Facades\Platform;
 
 const FILE_ID = '0199c1a0-0000-7000-8000-000000000001';
 
@@ -66,7 +66,7 @@ function fileReference(array $overrides = []): FileReferenceData
     ]);
 }
 
-function uploadGuide(): ITuoiProfessionistiDigitali\Connector\Data\FileData
+function uploadGuide(): IlTuoStudioDigitale\CoworkingConnector\Data\FileData
 {
     return Platform::uploadFile(
         uploadId: UPLOAD_ID,

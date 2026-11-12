@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://ituoiprofessionistidigitali.it/contract/transaction-types/assignment/1.json",
+    "$id": "https://coworking.iltuostudiodigitale.it/contract/transaction-types/assignment/1.json",
     "title": "assignment v1",
     "description": "La descrizione di un'attività affidata: il riferimento del suo processo e i nomi del catalogo del sistema, null dove il catalogo non ha un nome. Nessun testo libero e nessun dato del cliente finale: nome, codice fiscale e partita IVA del cliente non hanno un campo e non sono ammessi.",
     "type": "object",

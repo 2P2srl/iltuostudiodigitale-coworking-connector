@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Carbon\CarbonImmutable;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
 
 beforeEach(function (): void {
     $this->travelTo(CarbonImmutable::parse('2026-10-08T10:20:00+02:00'));

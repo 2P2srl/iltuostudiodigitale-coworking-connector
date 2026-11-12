@@ -6,10 +6,10 @@ use Carbon\CarbonImmutable;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
-use ITuoiProfessionistiDigitali\Connector\Data\ProfessionalRecordData;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\PlatformRequestException;
-use ITuoiProfessionistiDigitali\Connector\Exceptions\ProfessionalNotAssignedException;
-use ITuoiProfessionistiDigitali\Connector\Facades\Platform;
+use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\ProfessionalNotAssignedException;
+use IlTuoStudioDigitale\CoworkingConnector\Facades\Platform;
 
 beforeEach(function (): void {
     Http::preventStrayRequests();

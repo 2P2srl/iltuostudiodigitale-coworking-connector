@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Illuminate\Validation\Rule;
-use ITuoiProfessionistiDigitali\Connector\Enums\CounterpartyType;
-use ITuoiProfessionistiDigitali\Connector\Validation\Rules\ItalianTaxCode;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\CounterpartyType;
+use IlTuoStudioDigitale\CoworkingConnector\Validation\Rules\ItalianTaxCode;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 

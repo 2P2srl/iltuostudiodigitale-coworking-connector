@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Exceptions;
+namespace IlTuoStudioDigitale\CoworkingConnector\Exceptions;
 
-use ITuoiProfessionistiDigitali\Connector\Data\AcceptedEventData;
-use ITuoiProfessionistiDigitali\Connector\Data\RecordedTransactionData;
-use ITuoiProfessionistiDigitali\Connector\Enums\SystemStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AcceptedEventData;
+use IlTuoStudioDigitale\CoworkingConnector\Data\RecordedTransactionData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\SystemStatus;
 
 /**
  * A request the platform refused, or that the package refused before sending it.

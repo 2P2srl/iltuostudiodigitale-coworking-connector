@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Tests\Fixtures;
+namespace IlTuoStudioDigitale\CoworkingConnector\Tests\Fixtures;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use ITuoiProfessionistiDigitali\Connector\Concerns\RecordsAffectedOnPlatform;
-use ITuoiProfessionistiDigitali\Connector\Contracts\AffectsPlatformTransactions;
+use IlTuoStudioDigitale\CoworkingConnector\Concerns\RecordsAffectedOnPlatform;
+use IlTuoStudioDigitale\CoworkingConnector\Contracts\AffectsPlatformTransactions;
 
 /**
  * An activity of a proposal: it changes the transaction of its proposal without being one.

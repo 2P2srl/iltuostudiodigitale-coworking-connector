@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Validation\Rules;
+namespace IlTuoStudioDigitale\CoworkingConnector\Validation\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;

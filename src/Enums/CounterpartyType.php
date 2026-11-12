@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Enums;
+namespace IlTuoStudioDigitale\CoworkingConnector\Enums;
 
 enum CounterpartyType: string
 {

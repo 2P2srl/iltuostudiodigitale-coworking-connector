@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Http;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Data\AssignmentOfferedData;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformEventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Models\PlatformTransactionOutbox;
-use ITuoiProfessionistiDigitali\Connector\Outbox\EventOutbox;
-use ITuoiProfessionistiDigitali\Connector\Tests\TestCase;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Data\AssignmentOfferedData;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformEventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Models\PlatformTransactionOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Outbox\EventOutbox;
+use IlTuoStudioDigitale\CoworkingConnector\Tests\TestCase;
 use Opis\JsonSchema\Validator;
 
 pest()->extend(TestCase::class)->in(__DIR__);
@@ -210,9 +210,9 @@ function queuedOffer(PlatformTransactionOutbox $transaction): PlatformEventOutbo
 /**
  * A proposal prepared as a draft with one activity, then sent: the outbox has its revision 1.
  */
-function sentAssignment(): ITuoiProfessionistiDigitali\Connector\Tests\Fixtures\Assignment
+function sentAssignment(): IlTuoStudioDigitale\CoworkingConnector\Tests\Fixtures\Assignment
 {
-    $assignment = ITuoiProfessionistiDigitali\Connector\Tests\Fixtures\Assignment::query()->create(['status' => 'invited']);
+    $assignment = IlTuoStudioDigitale\CoworkingConnector\Tests\Fixtures\Assignment::query()->create(['status' => 'invited']);
     $assignment->activities()->create();
     $assignment->update(['uuid' => (string) Illuminate\Support\Str::uuid7()]);
 
@@ -222,10 +222,10 @@ function sentAssignment(): ITuoiProfessionistiDigitali\Connector\Tests\Fixtures\
 /**
  * A proposal sent, whose revision 1 the platform confirmed.
  */
-function confirmedAssignment(): ITuoiProfessionistiDigitali\Connector\Tests\Fixtures\Assignment
+function confirmedAssignment(): IlTuoStudioDigitale\CoworkingConnector\Tests\Fixtures\Assignment
 {
     $assignment = sentAssignment();
-    PlatformTransactionOutbox::query()->update(['sent_revision' => 1, 'status' => ITuoiProfessionistiDigitali\Connector\Enums\OutboxStatus::Sent]);
+    PlatformTransactionOutbox::query()->update(['sent_revision' => 1, 'status' => IlTuoStudioDigitale\CoworkingConnector\Enums\OutboxStatus::Sent]);
 
     return $assignment;
 }

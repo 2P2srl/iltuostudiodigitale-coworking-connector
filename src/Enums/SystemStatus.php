@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Enums;
+namespace IlTuoStudioDigitale\CoworkingConnector\Enums;
 
 /**
  * The status of a connected system. A 403 names the status in its `reason`.

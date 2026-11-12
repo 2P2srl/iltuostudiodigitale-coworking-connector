@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use BackedEnum;
 use Carbon\CarbonImmutable;
 use Closure;
 use Illuminate\Validation\Rule;
-use ITuoiProfessionistiDigitali\Connector\Contract;
-use ITuoiProfessionistiDigitali\Connector\Enums\CounterpartyType;
-use ITuoiProfessionistiDigitali\Connector\Enums\TransactionActivityStatus;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\CounterpartyType;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\TransactionActivityStatus;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Attributes\WithTransformer;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;

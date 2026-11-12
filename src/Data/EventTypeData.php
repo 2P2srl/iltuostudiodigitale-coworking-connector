@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ITuoiProfessionistiDigitali\Connector\Data;
+namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
-use ITuoiProfessionistiDigitali\Connector\Enums\EventSender;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\EventSender;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 
