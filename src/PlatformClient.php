@@ -40,6 +40,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Enums\SystemStatus;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileGoneException;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileIntegrityException;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\MemberNotFoundException;
+use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformException;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformNotConfiguredException;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\PlatformRequestException;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\ProfessionalNotAssignedException;
@@ -263,6 +264,7 @@ final readonly class PlatformClient
      * (rule N7). The platform keeps the download (rule N5).
      *
      * @throws ProfessionalNotFoundException The consultant is not among those to find, or has no curriculum.
+     * @throws PlatformException Any other refusal, or no answer.
      */
     public function curriculum(string $professionalId): CurriculumFile
     {
