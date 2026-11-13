@@ -25,6 +25,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Data\ListedMemberData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ListedProfessionalData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\MemberData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\MemberPage;
+use IlTuoStudioDigitale\CoworkingConnector\Data\PhotoFile;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalPage;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
@@ -36,6 +37,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionOutcomeData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\TransactionPage;
 use IlTuoStudioDigitale\CoworkingConnector\Data\TypologyData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\ProfessionalSort;
 use IlTuoStudioDigitale\CoworkingConnector\Enums\SystemStatus;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileGoneException;
 use IlTuoStudioDigitale\CoworkingConnector\Exceptions\FileIntegrityException;
@@ -197,7 +199,8 @@ final readonly class PlatformClient
      * GET /professionals: the consultants registered on the platform who agreed to be found by the firms, with their
      * profile and without contacts (rules N1–N3). The codes of the filters are those of profileOptions(): a centre, the
      * competences a consultant must all have, and availability (collaboration or employment) and work mode (remote or
-     * on_site), which also find whoever chose both (rule N6).
+     * on_site), which also find whoever chose both (rule N6). The list comes in pages, with the total, in the order
+     * asked (rule N1): by name when the search names none.
      *
      * @param  list<string>  $competences
      *
@@ -208,12 +211,13 @@ final readonly class PlatformClient
         ?string $province = null,
         ?string $search = null,
         ?int $perPage = null,
-        ?string $cursor = null,
+        ?int $page = null,
         ?string $centre = null,
         array $competences = [],
         ?string $availability = null,
         ?string $workMode = null,
         ?string $qualification = null,
+        ?ProfessionalSort $sort = null,
     ): ProfessionalPage {
         validator(
             ['competences' => $competences],
@@ -226,18 +230,21 @@ final readonly class PlatformClient
             'province' => $province,
             'search' => $search,
             'per_page' => $perPage,
-            'cursor' => $cursor,
+            'page' => $page,
             'centre' => $centre,
             'competences' => $competences,
             'availability' => $availability,
             'work_mode' => $workMode,
             'qualification' => $qualification,
+            'sort' => $sort?->value,
         ]));
 
         return new ProfessionalPage(
             professionals: array_map(ListedProfessionalData::from(...), $this->list($response)),
-            nextCursor: $this->cursor($response, 'next_cursor'),
-            previousCursor: $this->cursor($response, 'prev_cursor'),
+            currentPage: $this->meta($response, 'current_page'),
+            lastPage: $this->meta($response, 'last_page'),
+            perPage: $this->meta($response, 'per_page'),
+            total: $this->meta($response, 'total'),
         );
     }
 
@@ -249,14 +256,7 @@ final readonly class PlatformClient
      */
     public function professional(string $professionalId): ProfessionalData
     {
-        try
-        {
-            return ProfessionalData::from($this->data($this->request('GET', 'professionals/'.rawurlencode($professionalId))));
-        }
-        catch (PlatformRequestException $exception)
-        {
-            throw $exception->status === 404 ? new ProfessionalNotFoundException($professionalId) : $exception;
-        }
+        return ProfessionalData::from($this->data($this->consultant($professionalId)));
     }
 
     /**
@@ -269,16 +269,25 @@ final readonly class PlatformClient
      */
     public function curriculum(string $professionalId): CurriculumFile
     {
-        try
-        {
-            $response = $this->request('GET', 'professionals/'.rawurlencode($professionalId).'/curriculum');
-        }
-        catch (PlatformRequestException $exception)
-        {
-            throw $exception->status === 404 ? new ProfessionalNotFoundException($professionalId) : $exception;
-        }
+        $response = $this->consultant($professionalId, '/curriculum');
 
         return new CurriculumFile(self::attachmentName((string) $response->header('Content-Disposition')) ?? 'curriculum.pdf', $response->body());
+    }
+
+    /**
+     * GET /professionals/{id}/photo: the photo of a consultant, a JPEG square of at most 400 pixels (rule N8). The
+     * platform does not keep it as a reading (rule N5): ask it for every consultant shown, and keep it in cache until
+     * photo_updated_at changes.
+     *
+     * @throws ProfessionalNotFoundException The consultant is not among those to find, or has no photo.
+     * @throws PlatformException Any other refusal.
+     * @throws ConnectionException The platform cannot be reached, after the retries.
+     */
+    public function photo(string $professionalId): PhotoFile
+    {
+        $response = $this->consultant($professionalId, '/photo');
+
+        return new PhotoFile($response->body(), self::mediaType($response->header('Content-Type')) ?? 'image/jpeg');
     }
 
     /**
@@ -521,6 +530,16 @@ final readonly class PlatformClient
         $seconds = $response->header('Retry-After');
 
         return ctype_digit($seconds) ? (int) $seconds : self::DEFAULT_RETRY_AFTER_SECONDS;
+    }
+
+    /**
+     * The media type of a Content-Type, without its parameters: null when the header names none.
+     */
+    private static function mediaType(string $contentType): ?string
+    {
+        $type = HeaderUtils::split($contentType, ';')[0] ?? null;
+
+        return is_string($type) ? $type : null;
     }
 
     /**
@@ -781,6 +800,33 @@ final readonly class PlatformClient
     private function query(array $filters): array
     {
         return array_filter($filters, static fn (mixed $value): bool => $value !== null && $value !== []);
+    }
+
+    /**
+     * GET /professionals/{id} or one of its files, with the 404 of a consultant not to find (rules N4, N7 and N8).
+     *
+     * @throws ProfessionalNotFoundException
+     */
+    private function consultant(string $professionalId, string $file = ''): Response
+    {
+        try
+        {
+            return $this->request('GET', 'professionals/'.rawurlencode($professionalId).$file);
+        }
+        catch (PlatformRequestException $exception)
+        {
+            throw $exception->status === 404 ? new ProfessionalNotFoundException($professionalId) : $exception;
+        }
+    }
+
+    /**
+     * A number of a page in `meta`: the page, the last one, the size or the total.
+     */
+    private function meta(Response $response, string $key): int
+    {
+        $value = $response->json('meta.'.$key);
+
+        return is_int($value) ? $value : 0;
     }
 
     /**

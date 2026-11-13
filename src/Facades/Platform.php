@@ -14,6 +14,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Data\FileReferenceData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ListedMemberData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\MemberData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\MemberPage;
+use IlTuoStudioDigitale\CoworkingConnector\Data\PhotoFile;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalPage;
 use IlTuoStudioDigitale\CoworkingConnector\Data\ProfessionalRecordData;
@@ -22,6 +23,7 @@ use IlTuoStudioDigitale\CoworkingConnector\Data\RecordedTransactionData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\RegisteredMemberData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\SystemData;
 use IlTuoStudioDigitale\CoworkingConnector\Data\TypologyData;
+use IlTuoStudioDigitale\CoworkingConnector\Enums\ProfessionalSort;
 use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
 
 /**
@@ -33,9 +35,10 @@ use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
  * @method static MemberPage searchMembers(?string $typology = null, ?string $search = null, ?int $perPage = null, ?string $cursor = null)
  * @method static ListedMemberData member(string $memberId)
  * @method static ProfileOptionsData profileOptions()
- * @method static ProfessionalPage searchProfessionals(?string $typology = null, ?string $province = null, ?string $search = null, ?int $perPage = null, ?string $cursor = null, ?string $centre = null, list<string> $competences = [], ?string $availability = null, ?string $workMode = null, ?string $qualification = null)
+ * @method static ProfessionalPage searchProfessionals(?string $typology = null, ?string $province = null, ?string $search = null, ?int $perPage = null, ?int $page = null, ?string $centre = null, list<string> $competences = [], ?string $availability = null, ?string $workMode = null, ?string $qualification = null, ?ProfessionalSort $sort = null)
  * @method static ProfessionalData professional(string $professionalId)
  * @method static CurriculumFile curriculum(string $professionalId)
+ * @method static PhotoFile photo(string $professionalId)
  * @method static AcceptedEventData send(EnvelopeData $envelope)
  * @method static RecordedTransactionData transaction(string $id)
  * @method static void declareProfessional(string $taxCode, ProfessionalRecordData $record)

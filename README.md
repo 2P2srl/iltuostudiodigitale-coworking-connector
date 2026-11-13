@@ -350,7 +350,7 @@ final class ExternalAssignmentActivity extends Model implements AffectsPlatformT
 
 ## Consulenti registrati
 
-I consulenti che si registrano sul portale, completano il profilo e danno il consenso a essere trovati dagli studi si cercano per competenze, senza contatti, e si leggono uno alla volta con i dati per affidare un incarico, il profilo completo e il curriculum (N1–N7). L'incarico è poi come ogni incarico a persona: il sistema lo registra con la controparte persona e lo porta avanti da sé.
+I consulenti che si registrano sul portale, completano il profilo e danno il consenso a essere trovati dagli studi si cercano per competenze, senza contatti, e si leggono uno alla volta con i dati per affidare un incarico, il profilo completo, il curriculum e la foto (N1–N8). L'incarico è poi come ogni incarico a persona: il sistema lo registra con la controparte persona e lo porta avanti da sé.
 
 ```php
 $voci = Platform::profileOptions();   // ProfileOptionsData: nature, disponibilità, modalità, titoli, centri con le competenze
@@ -363,11 +363,15 @@ $pagina = Platform::searchProfessionals(
     competences: ['payroll', 'contractors'],       // tutte, al massimo 20
     availability: 'collaboration',                 // anche chi ha scelto entrambe
     workMode: 'remote',
-);   // ProfessionalPage
+    sort: ProfessionalSort::Experience,            // Name (predefinito), Experience o Recent
+    page: 2,                                       // da 1; per_page da 1 a 100, predefinito 25
+);   // ProfessionalPage: currentPage, lastPage, perPage, total e hasMore()
 
-foreach ($pagina->professionals as $consulente) { /* ListedProfessionalData: nome, comune, tipologie, natura, disponibilità, modalità, anni, titoli, competenze, has_curriculum */ }
+foreach ($pagina->professionals as $consulente) { /* ListedProfessionalData: nome, comune, tipologie, natura, disponibilità, modalità, anni, titoli, competenze, presentazione, has_curriculum, has_photo, photo_updated_at, profile_completed_at */ }
 
-$consulente = Platform::professional($id);   // ProfessionalData: in più contatti, presentazione, LinkedIn, ente che fattura e dati del curriculum
+$foto = Platform::photo($id);   // PhotoFile: content e mimeType, un JPEG quadrato fino a 400 px
+
+$consulente = Platform::professional($id);   // ProfessionalData: in più contatti, LinkedIn, ente che fattura e dati del curriculum
 $controparte = $consulente->toCounterparty();
 
 $cv = Platform::curriculum($id);   // CurriculumFile: name e content, un PDF in chiaro
@@ -378,6 +382,8 @@ $cv = Platform::curriculum($id);   // CurriculumFile: name e content, un PDF in 
 - `billing_entity` c'è solo per ditta individuale e società; `curriculum` è `null` senza curriculum.
 - Il portale registra ogni lettura del dettaglio e ogni download del curriculum (N5): leggili quando lo studio sta per affidare l'incarico, non per riempire un elenco. Contatti, profilo e curriculum sono dati personali: niente cache, niente log, niente copie fuori dall'anagrafica che il sistema crea per l'incarico.
 - `curriculum()` di un consulente non consultabile o senza curriculum è `ProfessionalNotFoundException`.
+- L'elenco è a pagine con il totale (N1): `hasMore()` dice se c'è una pagina dopo, e una pagina oltre l'ultima è vuota. Il cursore non c'è più.
+- La foto (N8) non si registra come lettura: chiedila per ogni consulente che mostri, se `has_photo` è vero. Tienila in cache finché `photo_updated_at` non cambia, e toglila quando il consulente esce dall'elenco o `has_photo` diventa falso. `photo()` di un consulente non consultabile o senza foto è `ProfessionalNotFoundException`.
 - Un consulente che non è più consultabile, anche perché ha revocato il consenso, è `ProfessionalNotFoundException`: il portale non dice perché.
 - `tax_code_verified: false` vuol dire un codice fiscale dichiarato, con il solo controllo formale.
 - L'anagrafica di un consulente registrato è bloccata sul portale (R20): l'incarico la fotografa così com'è.

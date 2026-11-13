@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
+use Carbon\CarbonImmutable;
+use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 
 /**
  * A consultant as GET /professionals/{id} shows it, with the data to offer an assignment and the whole profile (rule
- * N4). The platform keeps every reading (rule N5). Contacts, profile and curriculum are personal data: never cache them,
- * log them or keep them outside the record the system creates for the assignment.
+ * N4), the fields of the list among them. The platform keeps every reading (rule N5). Contacts, profile and curriculum
+ * are personal data: never cache them, log them or keep them outside the record the system creates for the assignment.
  */
 final class ProfessionalData extends Data
 {
@@ -20,6 +24,8 @@ final class ProfessionalData extends Data
      * @param  list<string>  $competences  In the order of the catalogue.
      * @param  BillingEntityData|null  $billing_entity  Only for a sole proprietorship or a company.
      * @param  CurriculumData|null  $curriculum  The file comes with PlatformClient::curriculum().
+     * @param  CarbonImmutable|null  $photo_updated_at  When the photo last changed, null without one.
+     * @param  CarbonImmutable|null  $profile_completed_at  When the profile became complete, the last time.
      */
     public function __construct(
         public string $id,
@@ -44,6 +50,11 @@ final class ProfessionalData extends Data
         public ?string $linkedin_url = null,
         public ?BillingEntityData $billing_entity = null,
         public ?CurriculumData $curriculum = null,
+        public bool $has_photo = false,
+        #[WithCast(DateTimeInterfaceCast::class, format: Contract::DATE_INPUT_FORMATS)]
+        public ?CarbonImmutable $photo_updated_at = null,
+        #[WithCast(DateTimeInterfaceCast::class, format: Contract::DATE_INPUT_FORMATS)]
+        public ?CarbonImmutable $profile_completed_at = null,
     ) {}
 
     /**

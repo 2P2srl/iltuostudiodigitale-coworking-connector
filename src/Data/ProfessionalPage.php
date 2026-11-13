@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 /**
- * A page of GET /professionals: pass nextCursor to the next search to read on.
+ * A page of GET /professionals, with the total (rule N1): pass the next page to the same search to read on. A page past
+ * the last one is empty.
  */
 final readonly class ProfessionalPage
 {
@@ -14,12 +15,14 @@ final readonly class ProfessionalPage
      */
     public function __construct(
         public array $professionals,
-        public ?string $nextCursor,
-        public ?string $previousCursor,
+        public int $currentPage,
+        public int $lastPage,
+        public int $perPage,
+        public int $total,
     ) {}
 
     public function hasMore(): bool
     {
-        return $this->nextCursor !== null;
+        return $this->currentPage < $this->lastPage;
     }
 }
