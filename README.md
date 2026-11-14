@@ -353,7 +353,7 @@ final class ExternalAssignmentActivity extends Model implements AffectsPlatformT
 I consulenti che si registrano sul portale, completano il profilo e danno il consenso a essere trovati dagli studi si cercano per competenze, senza contatti, e si leggono uno alla volta con i dati per affidare un incarico, il profilo completo, il curriculum e la foto (N1–N8). L'incarico è poi come ogni incarico a persona: il sistema lo registra con la controparte persona e lo porta avanti da sé.
 
 ```php
-$voci = Platform::profileOptions();   // ProfileOptionsData: nature, disponibilità, modalità, titoli, centri con le competenze
+$voci = Platform::profileOptions();   // ProfileOptionsData: nature, disponibilità, modalità, figure professionali, centri con le competenze, tipi di collaborazione (engagements)
 $voci->competences();                 // ['ordinary_accounting' => 'Contabilità ordinaria', …]
 ProfileOptionsData::nameOf($voci->qualifications, 'chartered_accountant');
 
@@ -363,11 +363,12 @@ $pagina = Platform::searchProfessionals(
     competences: ['payroll', 'contractors'],       // tutte, al massimo 20
     availability: 'collaboration',                 // anche chi ha scelto entrambe
     workMode: 'remote',
+    engagement: 'occasional',                      // chi ha indicato quel tipo di collaborazione
     sort: ProfessionalSort::Experience,            // Name (predefinito), Experience o Recent
     page: 2,                                       // da 1; per_page da 1 a 100, predefinito 25
 );   // ProfessionalPage: currentPage, lastPage, perPage, total e hasMore()
 
-foreach ($pagina->professionals as $consulente) { /* ListedProfessionalData: nome, comune, tipologie, natura, disponibilità, modalità, anni, titoli, competenze, presentazione, has_curriculum, has_photo, photo_updated_at, profile_completed_at */ }
+foreach ($pagina->professionals as $consulente) { /* ListedProfessionalData: nome, comune, tipologie, natura, disponibilità, modalità, anni, figure professionali, competenze, has_curriculum, has_photo, photo_updated_at, profile_completed_at, engagements, qualification_years, on_site_share */ }
 
 $foto = Platform::photo($id);   // PhotoFile: content e mimeType, un JPEG quadrato fino a 400 px
 
@@ -378,6 +379,7 @@ $cv = Platform::curriculum($id);   // CurriculumFile: name e content, un PDF in 
 ```
 
 - I codici del profilo (`legal_nature`, `availability`, `competences`…) sono quelli di `profileOptions()`, che dà anche le etichette: leggile da lì, non tenerle nel codice. Una voce nuova arriva senza una release del pacchetto.
+- `engagements` sono i tipi di collaborazione che il consulente accetta (`occasional`, `continuous`, `employment`); `availability` ne è il riassunto, come prima. `qualification_years` dà gli anni di ogni figura professionale (`QualificationYearsData`), e `years_of_experience` è il massimo fra quelli. `on_site_share` (`OnSiteShareData`: `unit` `percent` o `weekly_hours`, e `value`) c'è solo con la modalità `remote_or_on_site`. `presentation` il profilo non la raccoglie più: resta `null` e si toglie al prossimo giro.
 - L'elenco non ha contatti: codice fiscale, email, cellulare e partita IVA escono solo dal dettaglio (N3).
 - `billing_entity` c'è solo per ditta individuale e società; `curriculum` è `null` senza curriculum.
 - Il portale registra ogni lettura del dettaglio e ogni download del curriculum (N5): leggili quando lo studio sta per affidare l'incarico, non per riempire un elenco. Contatti, profilo e curriculum sono dati personali: niente cache, niente log, niente copie fuori dall'anagrafica che il sistema crea per l'incarico.

@@ -6,6 +6,7 @@ namespace IlTuoStudioDigitale\CoworkingConnector\Data;
 
 use Carbon\CarbonImmutable;
 use IlTuoStudioDigitale\CoworkingConnector\Contract;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
@@ -21,6 +22,12 @@ final class ProfessionalData extends Data
      * @param  list<string>  $typologies
      * @param  string|null  $mobile  In E.164, or null.
      * @param  list<string>  $qualifications  In the order of the catalogue, maybe none.
+     * @param  list<string>  $engagements  The kinds of work they are available for, in the order of the catalogue.
+     * @param  list<QualificationYearsData>  $qualification_years  The years for each qualification, in the same order.
+     * @param  OnSiteShareData|null  $on_site_share  Only with the work mode remote_or_on_site.
+     * @param  string|null  $availability  Derived from the engagements.
+     * @param  int|null  $years_of_experience  The most years among the qualifications.
+     * @param  string|null  $presentation  No longer collected by the profile: to be removed.
      * @param  list<string>  $competences  In the order of the catalogue.
      * @param  BillingEntityData|null  $billing_entity  Only for a sole proprietorship or a company.
      * @param  CurriculumData|null  $curriculum  The file comes with PlatformClient::curriculum().
@@ -55,6 +62,10 @@ final class ProfessionalData extends Data
         public ?CarbonImmutable $photo_updated_at = null,
         #[WithCast(DateTimeInterfaceCast::class, format: Contract::DATE_INPUT_FORMATS)]
         public ?CarbonImmutable $profile_completed_at = null,
+        public array $engagements = [],
+        #[DataCollectionOf(QualificationYearsData::class)]
+        public array $qualification_years = [],
+        public ?OnSiteShareData $on_site_share = null,
     ) {}
 
     /**

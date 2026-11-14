@@ -19,6 +19,7 @@ final class ProfileOptionsData extends Data
      * @param  list<ProfileOptionData>  $work_modes
      * @param  list<ProfileOptionData>  $qualifications
      * @param  list<CompetenceCentreData>  $competence_centres
+     * @param  list<ProfileOptionData>  $engagements  The kinds of work a consultant is available for.
      */
     public function __construct(
         #[DataCollectionOf(ProfileOptionData::class)]
@@ -31,6 +32,8 @@ final class ProfileOptionsData extends Data
         public array $qualifications,
         #[DataCollectionOf(CompetenceCentreData::class)]
         public array $competence_centres,
+        #[DataCollectionOf(ProfileOptionData::class)]
+        public array $engagements = [],
     ) {}
 
     /**

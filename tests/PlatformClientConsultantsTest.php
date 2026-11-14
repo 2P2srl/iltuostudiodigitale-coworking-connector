@@ -49,6 +49,9 @@ function listedConsultant(array $overrides = []): array
         'has_photo' => true,
         'photo_updated_at' => '2026-11-13T09:30:00Z',
         'profile_completed_at' => '2026-11-12T18:04:00Z',
+        'engagements' => ['occasional', 'employment'],
+        'qualification_years' => [['qualification' => 'chartered_accountant', 'years' => 6]],
+        'on_site_share' => null,
         ...$overrides,
     ];
 }
@@ -118,6 +121,11 @@ it('N1 and N3: searches the consultants with filters, order and page, without co
         ->has_photo->toBeTrue()
         ->photo_updated_at->toEqual(CarbonImmutable::parse('2026-11-13T09:30:00Z'))
         ->profile_completed_at->toEqual(CarbonImmutable::parse('2026-11-12T18:04:00Z'))
+        ->engagements->toBe(['occasional', 'employment'])
+        ->on_site_share->toBeNull()
+        ->and($page->professionals[0]->qualification_years[0])
+        ->qualification->toBe('chartered_accountant')
+        ->years->toBe(6)
         ->and(property_exists($page->professionals[0], 'email'))->toBeFalse()
         ->and($page)
         ->currentPage->toBe(2)
@@ -141,9 +149,12 @@ it('N1: sends every order of the contract', function (ProfessionalSort $sort, st
 ]);
 
 it('N4 and N8: reads a consultant listed before the photo and the date of the profile, with no defaults lost', function (): void {
-    $consultant = ListedProfessionalData::from(Arr::except(listedConsultant(), ['presentation', 'has_photo', 'photo_updated_at', 'profile_completed_at']));
+    $consultant = ListedProfessionalData::from(Arr::except(listedConsultant(), ['presentation', 'has_photo', 'photo_updated_at', 'profile_completed_at', 'engagements', 'qualification_years', 'on_site_share']));
 
     expect($consultant)
+        ->engagements->toBe([])
+        ->qualification_years->toBe([])
+        ->on_site_share->toBeNull()
         ->presentation->toBeNull()
         ->has_photo->toBeFalse()
         ->photo_updated_at->toBeNull()
@@ -153,9 +164,9 @@ it('N4 and N8: reads a consultant listed before the photo and the date of the pr
 it('N1 and N6: searches the consultants by their profile', function (): void {
     withToken(['platform.test/api/v1/professionals*' => consultantPage()]);
 
-    Platform::searchProfessionals(centre: 'labour', competences: ['payroll', 'contractors'], availability: 'employment', workMode: 'remote', qualification: 'labour_consultant');
+    Platform::searchProfessionals(centre: 'labour', competences: ['payroll', 'contractors'], availability: 'employment', workMode: 'remote', qualification: 'labour_consultant', engagement: 'occasional');
 
-    Http::assertSent(fn (Request $request): bool => urldecode($request->url()) === 'https://platform.test/api/v1/professionals?centre=labour&competences[0]=payroll&competences[1]=contractors&availability=employment&work_mode=remote&qualification=labour_consultant');
+    Http::assertSent(fn (Request $request): bool => urldecode($request->url()) === 'https://platform.test/api/v1/professionals?centre=labour&competences[0]=payroll&competences[1]=contractors&availability=employment&work_mode=remote&qualification=labour_consultant&engagement=occasional');
 });
 
 it('N1: refuses more competences than a search may ask for, before any request', function (): void {
@@ -180,7 +191,11 @@ it('N1: reads a page past the last one of the consultants', function (): void {
 });
 
 it('N4 and R3: reads a consultant with the data to assign, ready as the person counterparty', function (): void {
-    withToken(['platform.test/api/v1/professionals/*' => Http::response(['data' => consultantDetails()])]);
+    withToken(['platform.test/api/v1/professionals/*' => Http::response(['data' => consultantDetails([
+        'work_mode' => 'remote_or_on_site',
+        'engagements' => ['continuous'],
+        'on_site_share' => ['unit' => 'percent', 'value' => 40],
+    ])])]);
 
     $consultant = Platform::professional(CONSULTANT);
 
@@ -194,6 +209,11 @@ it('N4 and R3: reads a consultant with the data to assign, ready as the person c
         ->photo_updated_at->toEqual(CarbonImmutable::parse('2026-11-13T09:30:00Z'))
         ->profile_completed_at->toEqual(CarbonImmutable::parse('2026-11-12T18:04:00Z'))
         ->linkedin_url->toBe('https://www.linkedin.com/in/mario-rossi')
+        ->engagements->toBe(['continuous'])
+        ->and($consultant->qualification_years[0]->years)->toBe(6)
+        ->and($consultant->on_site_share)
+        ->unit->toBe('percent')
+        ->value->toBe(40)
         ->and($consultant->billing_entity)
         ->name->toBe('Rossi Consulenze S.r.l.')
         ->role->toBe('Amministratore unico')
@@ -251,11 +271,12 @@ it('C6: reads the options of the profile with their labels', function (): void {
         'legal_natures' => [['code' => 'freelancer', 'name' => 'Libera professione con partita IVA']],
         'availabilities' => [['code' => 'collaboration', 'name' => 'Collaborazione']],
         'work_modes' => [['code' => 'remote', 'name' => 'Da remoto']],
-        'qualifications' => [['code' => 'chartered_accountant', 'name' => 'Commercialista']],
+        'qualifications' => [['code' => 'chartered_accountant', 'name' => 'Commercialista'], ['code' => 'tax_consultant', 'name' => 'Tributarista'], ['code' => 'not_registered', 'name' => 'Non iscritto ad albi']],
         'competence_centres' => [
             ['code' => 'accounting', 'name' => 'Contabilità e bilancio', 'competences' => [['code' => 'ordinary_accounting', 'name' => 'Contabilità ordinaria']]],
             ['code' => 'labour', 'name' => 'Lavoro', 'competences' => [['code' => 'payroll', 'name' => 'Paghe e contributi']]],
         ],
+        'engagements' => [['code' => 'occasional', 'name' => 'Collaborazione occasionale'], ['code' => 'continuous', 'name' => 'Collaborazione continuativa'], ['code' => 'employment', 'name' => 'Lavoro dipendente']],
     ]])]);
 
     $options = Platform::profileOptions();
@@ -264,7 +285,19 @@ it('C6: reads the options of the profile with their labels', function (): void {
         ->and($options->competence_centres[1]->competences[0]->name)->toBe('Paghe e contributi')
         ->and($options->competences())->toBe(['ordinary_accounting' => 'Contabilità ordinaria', 'payroll' => 'Paghe e contributi'])
         ->and(ProfileOptionsData::nameOf($options->qualifications, 'chartered_accountant'))->toBe('Commercialista')
-        ->and(ProfileOptionsData::nameOf($options->qualifications, 'astronaut'))->toBeNull();
+        ->and(ProfileOptionsData::nameOf($options->qualifications, 'astronaut'))->toBeNull()
+        ->and(ProfileOptionsData::nameOf($options->qualifications, 'not_registered'))->toBe('Non iscritto ad albi')
+        ->and(ProfileOptionsData::nameOf($options->engagements, 'continuous'))->toBe('Collaborazione continuativa');
+});
+
+it('C6: reads the options of a portal that lists no engagements yet', function (): void {
+    expect(ProfileOptionsData::from([
+        'legal_natures' => [],
+        'availabilities' => [],
+        'work_modes' => [],
+        'qualifications' => [],
+        'competence_centres' => [],
+    ])->engagements)->toBe([]);
 });
 
 it('N4, N7 and N8: tells a consultant not to find, or without the file, from the other errors', function (string $path, Closure $read): void {

@@ -199,8 +199,9 @@ final readonly class PlatformClient
      * GET /professionals: the consultants registered on the platform who agreed to be found by the firms, with their
      * profile and without contacts (rules N1–N3). The codes of the filters are those of profileOptions(): a centre, the
      * competences a consultant must all have, and availability (collaboration or employment) and work mode (remote or
-     * on_site), which also find whoever chose both (rule N6). The list comes in pages, with the total, in the order
-     * asked (rule N1): by name when the search names none.
+     * on_site), which also find whoever chose both (rule N6), and an engagement (occasional, continuous or employment)
+     * that a consultant declared. The list comes in pages, with the total, in the order asked (rule N1): by name when
+     * the search names none.
      *
      * @param  list<string>  $competences
      *
@@ -218,6 +219,7 @@ final readonly class PlatformClient
         ?string $workMode = null,
         ?string $qualification = null,
         ?ProfessionalSort $sort = null,
+        ?string $engagement = null,
     ): ProfessionalPage {
         validator(
             ['competences' => $competences],
@@ -236,6 +238,7 @@ final readonly class PlatformClient
             'availability' => $availability,
             'work_mode' => $workMode,
             'qualification' => $qualification,
+            'engagement' => $engagement,
             'sort' => $sort?->value,
         ]));
 

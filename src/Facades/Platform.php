@@ -35,7 +35,7 @@ use IlTuoStudioDigitale\CoworkingConnector\PlatformClient;
  * @method static MemberPage searchMembers(?string $typology = null, ?string $search = null, ?int $perPage = null, ?string $cursor = null)
  * @method static ListedMemberData member(string $memberId)
  * @method static ProfileOptionsData profileOptions()
- * @method static ProfessionalPage searchProfessionals(?string $typology = null, ?string $province = null, ?string $search = null, ?int $perPage = null, ?int $page = null, ?string $centre = null, list<string> $competences = [], ?string $availability = null, ?string $workMode = null, ?string $qualification = null, ?ProfessionalSort $sort = null)
+ * @method static ProfessionalPage searchProfessionals(?string $typology = null, ?string $province = null, ?string $search = null, ?int $perPage = null, ?int $page = null, ?string $centre = null, list<string> $competences = [], ?string $availability = null, ?string $workMode = null, ?string $qualification = null, ?ProfessionalSort $sort = null, ?string $engagement = null)
  * @method static ProfessionalData professional(string $professionalId)
  * @method static CurriculumFile curriculum(string $professionalId)
  * @method static PhotoFile photo(string $professionalId)
